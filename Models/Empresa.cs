@@ -38,12 +38,11 @@ namespace EmployeeManagementSystem.Models
             Console.Write($"Ingresa el salario del empleado: "); string? salario = Console.ReadLine();
             double salarioDouble = Convert.ToDouble(salario);
 
-            Empleado nuevoEmpleado = new Empleado(nombre, apellido, numeroDeIdentificacion, edadByte, cargo, salarioDouble);
+            Empleado nuevoEmpleado = new Empleado(nombre, apellido, edadByte, numeroDeIdentificacion, cargo, salarioDouble);
 
             Empleados.Add(nuevoEmpleado);
             Console.WriteLine("Empleado agregado con exito");
         }
-
         public void EliminarEmpleado()
         {
             Console.WriteLine($"");
@@ -63,7 +62,6 @@ namespace EmployeeManagementSystem.Models
                 Console.WriteLine("El empleado no existe");
             }
         }
-
         public void MostrarTodosLosEmpleados()
         {
             Console.WriteLine($"");
@@ -76,7 +74,6 @@ namespace EmployeeManagementSystem.Models
                 Console.WriteLine($"-------------------------------------");
             }
         }
-
         public void ActualizarEmpleado()
         {
             Console.WriteLine($"");
