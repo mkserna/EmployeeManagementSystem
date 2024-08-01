@@ -20,27 +20,7 @@ namespace EmployeeManagementSystem.Models
 
         public void AgregarEmpleado()
         {
-
-            Console.Write($"Ingresa el nombre del empleado: "); string? nombre = Console.ReadLine();
-            nombre = nombre.Trim();
-
-            Console.Write($"Ingresa el apellido del empleado: "); string? apellido = Console.ReadLine();
-            apellido = apellido.Trim();
-
-            Console.Write($"Ingresa el numero de identificacion del empleado: "); string? numeroDeIdentificacion = Console.ReadLine();
-            numeroDeIdentificacion = numeroDeIdentificacion.Trim();
-
-            Console.Write($"Ingresa el edad del empleado: "); string? edad = Console.ReadLine();
-            byte edadByte = Convert.ToByte(edad);
-
-            Console.Write($"Ingresa el cargo del empleado: "); string? cargo = Console.ReadLine();
-            cargo = cargo.Trim();
-
-            Console.Write($"Ingresa el salario del empleado: "); string? salario = Console.ReadLine();
-            double salarioDouble = Convert.ToDouble(salario);
-
-            Empleado nuevoEmpleado = new Empleado(nombre, apellido, edadByte, numeroDeIdentificacion, cargo, salarioDouble);
-
+            var nuevoEmpleado = Administracion.CrearEmpleado();
             Empleados.Add(nuevoEmpleado);
             Console.WriteLine("Empleado agregado con exito");
         }
@@ -55,7 +35,26 @@ namespace EmployeeManagementSystem.Models
 
             if ((nombreEliminar != null) && (apellidoEliminar != null))
             {
-                Empleado empleado = Empleados.Find((x) => x.Nombre == nombreEliminar && x.Apellido == apellidoEliminar);
+                Empleado empleado = Empleados.Find((x) => x.GetNombre() == nombreEliminar && x.GetApellido() == apellidoEliminar);
+                Empleados.Remove(empleado);
+                Console.WriteLine("");
+                Console.WriteLine("Empleado eliminado con exito");
+            }
+            else
+            {
+                Console.WriteLine("");
+                Console.WriteLine("El empleado no existe");
+            }
+        }
+        public void EliminarEmpleadoIdentificacion(){
+            Console.WriteLine($"");
+            Console.Write("------ ELIMINANDO EMPLEADO ------");
+            Console.Write($"Ingrese el numero de identificacion del empleado a eliminar: "); string? numeroDeIdentificacion = Console.ReadLine();
+            numeroDeIdentificacion = numeroDeIdentificacion.Trim();
+
+            if (numeroDeIdentificacion != null)
+            {
+                Empleado empleado = Empleados.Find(x => x.NumeroDeIdentificacion == numeroDeIdentificacion);
                 Empleados.Remove(empleado);
                 Console.WriteLine("");
                 Console.WriteLine("Empleado eliminado con exito");
@@ -89,29 +88,34 @@ namespace EmployeeManagementSystem.Models
 
             if (empleado != null)
             {
-                Console.Write($"Ingresa el nombre del empleado o presione enter para mantener el mismo ({empleado}): "); string? nombre = Console.ReadLine();
+                Console.Write($"Ingresa el nombre del empleado o presione enter para mantener el mismo ({empleado.GetNombre()}): "); string? nombre = Console.ReadLine();
                 nombre = nombre.Trim();
 
-                Console.Write($"Ingresa el apellido del empleado o presione enter para mantener el mismo ({empleado}): "); string? apellido = Console.ReadLine();
+                Console.Write($"Ingresa el apellido del empleado o presione enter para mantener el mismo ({empleado.GetApellido()}): "); string? apellido = Console.ReadLine();
                 apellido = apellido.Trim();
 
-                Console.Write($"Ingresa el numero de identificacion del empleado o presione enter para mantener el mismo ({empleado}): "); string? numeroDeIdentificacionActualizar = Console.ReadLine();
+                Console.Write($"Ingresa el numero de identificacion del empleado o presione enter para mantener el mismo ({empleado.NumeroDeIdentificacion}): "); string? numeroDeIdentificacionActualizar = Console.ReadLine();
                 numeroDeIdentificacion = numeroDeIdentificacion.Trim();
 
-                Console.Write($"Ingresa la edad del empleado o presione enter para mantener el mismo ({empleado}): "); string? edad = Console.ReadLine();
-                byte edadByte = Convert.ToByte(edad);
+                Console.Write($"Ingresa la edad del empleado o presione enter para mantener el mismo ({empleado.GetEdad()}): "); string? edad = Console.ReadLine();
+                int edadInt = Convert.ToInt32(edad);
 
-                Console.Write($"Ingresa el cargo del empleado o presione enter para mantener el mismo ({empleado}): "); string? cargo = Console.ReadLine();
+                Console.Write($"Ingresa el cargo del empleado o presione enter para mantener el mismo ({empleado.Cargo}): "); string? cargo = Console.ReadLine();
                 cargo = cargo.Trim();
 
-                Console.Write($"Ingresa el salario del empleado o presione enter para mantener el mismo ({empleado}): "); string? salario = Console.ReadLine();
+                Console.Write($"Ingresa el salario del empleado o presione enter para mantener el mismo ({empleado.Salario}): "); string? salario = Console.ReadLine();
                 double salarioDouble = Convert.ToDouble(salario);
 
-                empleado.Nombre = string.IsNullOrEmpty(nombre) ? empleado.Nombre : nombre;
-                empleado.Apellido = string.IsNullOrEmpty(apellido) ? empleado.Apellido : apellido;
+                empleado.SetNombre(string.IsNullOrEmpty(nombre) ? empleado.GetNombre() : nombre);
+
+                empleado.SetApellido(string.IsNullOrEmpty(apellido) ? empleado.GetApellido() : apellido);
+
                 empleado.NumeroDeIdentificacion = string.IsNullOrEmpty(numeroDeIdentificacionActualizar) ? empleado.NumeroDeIdentificacion : numeroDeIdentificacionActualizar;
-                empleado.Edad = edadByte;
+
+                empleado.SetEdad(edadInt);
+
                 empleado.Cargo = string.IsNullOrEmpty(cargo) ? empleado.Cargo : cargo;
+                
                 empleado.Salario = salarioDouble;
 
                 Console.WriteLine("");
@@ -165,34 +169,12 @@ namespace EmployeeManagementSystem.Models
                 Console.WriteLine("El empleado no existe");
             }
         }
-
         public void AgregarCliente()
         {
-
-            Console.Write($"Ingresa el nombre del cliente: "); string? nombre = Console.ReadLine();
-            nombre = nombre.Trim();
-
-            Console.Write($"Ingresa el apellido del cliente: "); string? apellido = Console.ReadLine();
-            apellido = apellido.Trim();
-
-            Console.Write($"Ingresa el numero de identificacion del cliente: "); string? numeroDeIdentificacion = Console.ReadLine();
-            numeroDeIdentificacion = numeroDeIdentificacion.Trim();
-
-            Console.Write($"Ingresa el edad del cliente: "); string? edad = Console.ReadLine();
-            byte edadByte = Convert.ToByte(edad);
-
-            Console.Write($"Ingresa el correo del cliente: "); string? email = Console.ReadLine();
-            email = email.Trim();
-
-            Console.Write($"Ingresa el edad del cliente: "); string? telefono = Console.ReadLine();
-            telefono = telefono.Trim();
-
-            Cliente nuevoCliete = new Cliente(nombre, apellido, edadByte, email, telefono);
-
+            var nuevoCliete = Administracion.CrearCliente();
             Clientes.Add(nuevoCliete);
             Console.WriteLine("Cliente agregado con exito");
         }
-
         public void EliminarClienteNombre()
         {
             Console.WriteLine($"");
@@ -204,7 +186,7 @@ namespace EmployeeManagementSystem.Models
 
             if ((nombreEliminar != null) && (apellidoEliminar != null))
             {
-                Cliente cliente = Clientes.Find((x) => x.Nombre == nombreEliminar && x.Apellido == apellidoEliminar);
+                Cliente cliente = Clientes.Find((x) => x.GetNombre() == nombreEliminar && x.GetApellido() == apellidoEliminar);
                 Clientes.Remove(cliente);
                 Console.WriteLine("");
                 Console.WriteLine("Cliente eliminado con exito");
@@ -215,7 +197,6 @@ namespace EmployeeManagementSystem.Models
                 Console.WriteLine("El cliente no existe");
             }
         }
-
         public void MostrarTodosLosClientes()
         {
             Console.WriteLine($"");

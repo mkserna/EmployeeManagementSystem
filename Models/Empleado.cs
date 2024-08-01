@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.Models
 {
-    public class Empleado(string nombre, string apellido, byte edad, string numeroDeIdentificacion, string cargo, double salario) : Persona(nombre, apellido, edad)
+    public class Empleado(string nombre, string apellido, int edad, string numeroDeIdentificacion, string cargo, double salario) : Persona(nombre, apellido, edad)
     {
         public Guid Id { get; set; }
         public string NumeroDeIdentificacion { get; set; }
@@ -19,7 +19,9 @@ namespace EmployeeManagementSystem.Models
         }
 
         public override void MostrarInformacionPersona(){
-            base.MostrarInformacionPersona();
+            Console.WriteLine($"Nombre: {Nombre}");
+            Console.WriteLine($"Apellido: {Apellido}");
+            Console.WriteLine($"Edad: {Edad}");
             Console.WriteLine($"Numero de identificacion: {NumeroDeIdentificacion}");
             Console.WriteLine($"Cargo: {Cargo}");
             Console.WriteLine($"Salario: {Salario}");

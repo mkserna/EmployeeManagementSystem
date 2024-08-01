@@ -5,22 +5,27 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.Models
 {
-    public class Persona
+    public abstract class Persona
     {
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public byte Edad { get; set; }
+        protected Guid Id { get; set; }
+        protected string Nombre { get; set; }
+        protected string Apellido { get; set; }
+        protected int Edad { get; set; }
 
-        public Persona(string nombre, string apellido, byte edad)
+        public string GetNombre() => Nombre;
+        public string GetApellido() => Apellido;  
+        public int GetEdad() => Edad;
+
+        public string SetNombre(string nombre) => Nombre = nombre;
+        public string SetApellido(string apellido) => Apellido = apellido;
+        public int SetEdad(int edad) => Edad = edad;
+
+        public Persona(string nombre, string apellido, int edad)
         {
             Nombre = nombre;
             Apellido = apellido;
             Edad = edad;
         }
-        public  virtual void MostrarInformacionPersona(){
-            Console.WriteLine($"Nombre: {Nombre}");
-            Console.WriteLine($"Apellido: {Apellido}");
-            Console.WriteLine($"Edad: {Edad}");
-        }
+        public abstract void MostrarInformacionPersona();
     }
 }
