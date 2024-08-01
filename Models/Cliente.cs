@@ -10,7 +10,7 @@ namespace EmployeeManagementSystem.Models
         public string Email { get; set; }
         public string Telefono { get; set; }
 
-        public void MostrarInformacionCliente(){
+        public override void MostrarInformacionPersona(){
             base.MostrarInformacionPersona();
             Console.WriteLine($"Email: {Email}");
             Console.WriteLine($"Telefono: {Telefono}");

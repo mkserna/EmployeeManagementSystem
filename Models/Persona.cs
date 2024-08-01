@@ -17,7 +17,7 @@ namespace EmployeeManagementSystem.Models
             Apellido = apellido;
             Edad = edad;
         }
-        public void MostrarInformacionPersona(){
+        public  virtual void MostrarInformacionPersona(){
             Console.WriteLine($"Nombre: {Nombre}");
             Console.WriteLine($"Apellido: {Apellido}");
             Console.WriteLine($"Edad: {Edad}");

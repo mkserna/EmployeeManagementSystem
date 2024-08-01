@@ -18,7 +18,7 @@ namespace EmployeeManagementSystem.Models
             return bonificacion;
         }
 
-        public void MostrarInformacionEmpleado(){
+        public override void MostrarInformacionPersona(){
             base.MostrarInformacionPersona();
             Console.WriteLine($"Numero de identificacion: {NumeroDeIdentificacion}");
             Console.WriteLine($"Cargo: {Cargo}");

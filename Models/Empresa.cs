@@ -10,6 +10,7 @@ namespace EmployeeManagementSystem.Models
         public string Nombre { get; set; }
         public string Direccion { get; set; }
         public List<Empleado> Empleados { get; set; }
+        public List<Cliente> Clientes { get; set; }
 
         public Empresa(string nombre, string direccion)
         {
@@ -43,15 +44,18 @@ namespace EmployeeManagementSystem.Models
             Empleados.Add(nuevoEmpleado);
             Console.WriteLine("Empleado agregado con exito");
         }
-        public void EliminarEmpleado()
+        public void EliminarEmpleadoNombre()
         {
             Console.WriteLine($"");
             Console.Write("------ ELIMINANDO EMPLEADO ------");
-            Console.WriteLine($"Ingrese el numero de documento del empleado a eliminar: "); string? numeroDeIdentificacionEliminar = Console.ReadLine();
-            numeroDeIdentificacionEliminar = numeroDeIdentificacionEliminar.Trim();
-            if (numeroDeIdentificacionEliminar != null)
+            Console.Write($"Ingrese el nombre del empleado a eliminar: "); string? nombreEliminar = Console.ReadLine();
+            nombreEliminar = nombreEliminar.Trim();
+            Console.Write($"Ingrese el apellido del empleado a eliminar: "); string? apellidoEliminar = Console.ReadLine();
+            apellidoEliminar = apellidoEliminar.Trim();
+
+            if ((nombreEliminar != null) && (apellidoEliminar != null))
             {
-                Empleado empleado = Empleados.Find(x => x.NumeroDeIdentificacion == numeroDeIdentificacionEliminar);
+                Empleado empleado = Empleados.Find((x) => x.Nombre == nombreEliminar && x.Apellido == apellidoEliminar);
                 Empleados.Remove(empleado);
                 Console.WriteLine("");
                 Console.WriteLine("Empleado eliminado con exito");
@@ -70,7 +74,7 @@ namespace EmployeeManagementSystem.Models
 
             foreach (Empleado empleado in Empleados)
             {
-                empleado.MostrarInformacionEmpleado();
+                empleado.MostrarInformacionPersona();
                 Console.WriteLine($"-------------------------------------");
             }
         }
@@ -132,7 +136,7 @@ namespace EmployeeManagementSystem.Models
 
             if (empleado != null)
             {
-                empleado.MostrarInformacionEmpleado();
+                empleado.MostrarInformacionPersona();
                 Console.WriteLine($"-------------------------------------");
             }
             else
@@ -152,7 +156,7 @@ namespace EmployeeManagementSystem.Models
 
             if (empleado != null)
             {
-                empleado.MostrarInformacionEmpleado();
+                empleado.MostrarInformacionPersona();
                 Console.WriteLine($"-------------------------------------");
             }
             else
@@ -162,7 +166,68 @@ namespace EmployeeManagementSystem.Models
             }
         }
 
+        public void AgregarCliente()
+        {
 
+            Console.Write($"Ingresa el nombre del cliente: "); string? nombre = Console.ReadLine();
+            nombre = nombre.Trim();
+
+            Console.Write($"Ingresa el apellido del cliente: "); string? apellido = Console.ReadLine();
+            apellido = apellido.Trim();
+
+            Console.Write($"Ingresa el numero de identificacion del cliente: "); string? numeroDeIdentificacion = Console.ReadLine();
+            numeroDeIdentificacion = numeroDeIdentificacion.Trim();
+
+            Console.Write($"Ingresa el edad del cliente: "); string? edad = Console.ReadLine();
+            byte edadByte = Convert.ToByte(edad);
+
+            Console.Write($"Ingresa el correo del cliente: "); string? email = Console.ReadLine();
+            email = email.Trim();
+
+            Console.Write($"Ingresa el edad del cliente: "); string? telefono = Console.ReadLine();
+            telefono = telefono.Trim();
+
+            Cliente nuevoCliete = new Cliente(nombre, apellido, edadByte, email, telefono);
+
+            Clientes.Add(nuevoCliete);
+            Console.WriteLine("Cliente agregado con exito");
+        }
+
+        public void EliminarClienteNombre()
+        {
+            Console.WriteLine($"");
+            Console.Write("------ ELIMINANDO CLIENTE ------");
+            Console.Write($"Ingrese el nombre del cliente a eliminar: "); string? nombreEliminar = Console.ReadLine();
+            nombreEliminar = nombreEliminar.Trim();
+            Console.Write($"Ingrese el apellido del empleado a eliminar: "); string? apellidoEliminar = Console.ReadLine();
+            apellidoEliminar = apellidoEliminar.Trim();
+
+            if ((nombreEliminar != null) && (apellidoEliminar != null))
+            {
+                Cliente cliente = Clientes.Find((x) => x.Nombre == nombreEliminar && x.Apellido == apellidoEliminar);
+                Clientes.Remove(cliente);
+                Console.WriteLine("");
+                Console.WriteLine("Cliente eliminado con exito");
+            }
+            else
+            {
+                Console.WriteLine("");
+                Console.WriteLine("El cliente no existe");
+            }
+        }
+
+        public void MostrarTodosLosClientes()
+        {
+            Console.WriteLine($"");
+            Console.Write("------ MOSTRANDO TODOS LOS CLIENTES ------");
+            Console.WriteLine($"");
+
+            foreach (Cliente cliente in Clientes)
+            {
+                cliente.MostrarInformacionPersona();
+                Console.WriteLine($"-------------------------------------");
+            }
+        }
 
     }
 }
