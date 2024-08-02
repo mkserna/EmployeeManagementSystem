@@ -17,34 +17,11 @@ namespace EmployeeManagementSystem.Models
             Nombre = nombre;
             Direccion = direccion;
         }
-
         public void AgregarEmpleado()
         {
             var nuevoEmpleado = Administracion.CrearEmpleado();
             Empleados.Add(nuevoEmpleado);
             Console.WriteLine("Empleado agregado con exito");
-        }
-        public void EliminarEmpleadoNombre()
-        {
-            Console.WriteLine($"");
-            Console.Write("------ ELIMINANDO EMPLEADO ------");
-            Console.Write($"Ingrese el nombre del empleado a eliminar: "); string? nombreEliminar = Console.ReadLine();
-            nombreEliminar = nombreEliminar.Trim();
-            Console.Write($"Ingrese el apellido del empleado a eliminar: "); string? apellidoEliminar = Console.ReadLine();
-            apellidoEliminar = apellidoEliminar.Trim();
-
-            if ((nombreEliminar != null) && (apellidoEliminar != null))
-            {
-                Empleado empleado = Empleados.Find((x) => x.GetNombre() == nombreEliminar && x.GetApellido() == apellidoEliminar);
-                Empleados.Remove(empleado);
-                Console.WriteLine("");
-                Console.WriteLine("Empleado eliminado con exito");
-            }
-            else
-            {
-                Console.WriteLine("");
-                Console.WriteLine("El empleado no existe");
-            }
         }
         public void EliminarEmpleadoIdentificacion(){
             Console.WriteLine($"");
